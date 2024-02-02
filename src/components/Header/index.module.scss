@@ -1,0 +1,48 @@
+.header {
+  width: 100%;
+  @media only screen and (max-width: 768px) {
+    padding-bottom: 0;
+    max-height: 100px;
+  }
+}
+
+.headerWrapped {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 100px;
+
+  border-bottom: 1px solid black;
+  @media only screen and (max-width: 768px) {
+    align-items: center;
+  }
+}
+
+.logo {
+  max-width: 300px;
+  max-height: 200px;
+  margin-right: 200px;
+  @media only screen and (max-width: 768px) {
+    max-width: 100px;
+    margin-left: -50px;
+  }
+}
+
+.favicon {
+  display: flex;
+  font-size: 2rem;
+  gap: 30px;
+  padding-right: 50px;
+  @media only screen and (max-width: 768px) {
+    font-size: 1.2rem;
+    gap: 10px;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .logo {
+    max-width: 100%;
+    margin: 0;
+  }
+}

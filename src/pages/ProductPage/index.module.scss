@@ -1,0 +1,35 @@
+.productPage {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 100px;
+}
+.title {
+  font-size: 3rem;
+  text-decoration: underline;
+}
+.details {
+  font-size: 1.25rem;
+  padding-bottom: 10px;
+}
+.productImage {
+  max-width: 300px;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.productDetails {
+  max-width: 500px;
+}
+
+.addToCartButton {
+  background-color: rgb(46, 46, 46);
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}

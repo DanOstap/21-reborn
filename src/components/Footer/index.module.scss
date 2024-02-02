@@ -1,0 +1,14 @@
+footer {
+  max-width: 100%;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 100px;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+    margin: 30px 20px;
+  }
+}
