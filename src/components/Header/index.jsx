@@ -32,13 +32,12 @@ function Header ({ isLogin }) {
           <NavLink to='/' className={styles.logoLink}>
             <img
               className={styles.logo}
-              src='/21.png'
+              src='/21logo.png'
               alt='logo'
               draggable='false'
             />
           </NavLink>
         </div>
-        <div></div>
       </div>
     </header>
   )

@@ -4,19 +4,20 @@ import { REG_EXP } from '../../utils/validscheme'
 import { useHistory, NavLink } from 'react-router-dom/cjs/react-router-dom.min'
 import style from './index.module.scss'
 
-function Login ({ setIsLogin }) {
-  const [mail, setName] = useState('')
-  const initialValues = { name: '', password: '' }
+function Login ({ setIsLogin, setLoginName }) {
+  const initialValues = { email: '', password: '' }
   const history = useHistory()
 
-  const handleSubmit = () => {
-    history.push('/')
-    setIsLogin(true)
-  }
-
-  const changeName = e => {
-    let newName = e.target.value
-    setName(newName)
+  const handleSubmit = (values, formikBag) => {
+    try {
+      const { email } = values
+      setLoginName(email)
+      setIsLogin(true)
+      history.push('/')
+      formikBag.resetForm()
+    } catch (error) {
+      console.log('error :>> ', error)
+    }
   }
 
   return (
@@ -28,14 +29,13 @@ function Login ({ setIsLogin }) {
       {({ isSubmitting }) => (
         <Form className={style.form} onSubmit={handleSubmit}>
           <Field
-            type='text'
-            name='name' // Update the name attribute to 'name'
-            onChange={changeName}
+            type='email'
+            name='email'
             placeholder='example@mail.com'
             className={style.input}
           />
           <ErrorMessage
-            name='name' // Update the name attribute to 'name'
+            name='email'
             component='span'
             className={style.errorMsg}
           />
@@ -53,7 +53,11 @@ function Login ({ setIsLogin }) {
           />
 
           <div className={style.msgAccount}>
-            <button type='submit' className={style.submitBtn}>
+            <button
+              type='submit'
+              className={style.submitBtn}
+              disabled={isSubmitting}
+            >
               Submit
             </button>
             Already have an account?{' '}

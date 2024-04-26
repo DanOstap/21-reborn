@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 import { CartContext } from '../../utils/cartcontext'
 
 const ProductPage = () => {
-  const { addToCart } = useContext(CartContext)
+  const { addToCart: addToCartContext, cart } = useContext(CartContext)
   const { id } = useParams()
   const [product, setProduct] = useState(null)
 
@@ -24,34 +24,44 @@ const ProductPage = () => {
     fetchProduct()
   }, [id])
 
-  if (!product) {
-    return <div>Loading product...</div>
+  const handleAddToCart = productToAdd => {
+    const isProductInCart = cart.some(item => item.id === productToAdd.id)
+
+    if (!isProductInCart) {
+      addToCartContext(productToAdd)
+    } else {
+      console.log('This product is already in the cart.')
+    }
   }
 
-  return (
-    <div className={styles.productPage}>
-      <div>
-        <img
-          src={`../../../public/футболка${product.id}.png`}
-          alt='item'
-          className={styles.productImage}
-        />
+  if (product) {
+    return (
+      <div className={styles.productPage}>
+        <div>
+          <img
+            src={`../../../public/футболка${product.id}.png`}
+            alt='item'
+            className={styles.productImage}
+          />
+        </div>
+        <div className={styles.productDetails}>
+          <h1 className={styles.title}>{product.name}</h1>
+          <p className={styles.details}>{product.description}</p>
+          <p className={styles.details}>Color: {product.color}</p>
+          <p className={styles.details}>Size: {product.size}</p>
+          <p className={styles.details}>Price: {product.price} uah</p>
+          <button
+            className={styles.addToCartButton}
+            onClick={() => handleAddToCart(product)}
+          >
+            Add to cart
+          </button>
+        </div>
       </div>
-      <div className={styles.productDetails}>
-        <h1 className={styles.title}>{product.name}</h1>
-        <p className={styles.details}>{product.description}</p>
-        <p className={styles.details}>Color: {product.color}</p>
-        <p className={styles.details}>Size: {product.size}</p>
-        <p className={styles.details}>Price: {product.price} uah</p>
-        <button
-          className={styles.addToCartButton}
-          onClick={() => addToCart(product)}
-        >
-          Add to cart
-        </button>
-      </div>
-    </div>
-  )
+    )
+  }
+
+  return null
 }
 
 export default ProductPage

@@ -11,29 +11,43 @@ import Login from './pages/Loginup'
 import Cart from './pages/Cart/cart'
 import ProductPage from './pages/ProductPage'
 import { CartProvider } from '/src/utils/CartContext'
+import MainPage from './pages/MainPage'
 
 function App () {
-  const [isLogin, setIsLogin] = useState(false)
+  const [loginName, setLoginName] = useState('')
+  const [isLogin, setIsLogin] = useState(true)
   return (
     <Router>
       <CartProvider>
         <Header isLogin={isLogin} />
         <Switch>
           <Route path='/' exact>
-            <ItemList />
+            <MainPage />
           </Route>
           {isLogin ? (
             <Route path='/profile'>
-              <Profile isLogin={isLogin} setIsLogin={setIsLogin} />
+              <Profile
+                isLogin={isLogin}
+                setIsLogin={setIsLogin}
+                loginName={loginName}
+              />
             </Route>
           ) : (
             <Route path='/signup'>
-              <SignUp setIsLogin={setIsLogin} />
+              <SignUp
+                setIsLogin={setIsLogin}
+                setLoginName={setLoginName}
+                loginName={loginName}
+              />
             </Route>
           )}
           <Route path='/product/:id' component={ProductPage}></Route>
           <Route path='/login'>
-            <Login setIsLogin={setIsLogin} />
+            <Login
+              setIsLogin={setIsLogin}
+              setLoginName={setLoginName}
+              loginName={loginName}
+            />
           </Route>
           <Route path='/cart'>
             <Cart />

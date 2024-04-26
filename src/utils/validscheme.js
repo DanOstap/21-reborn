@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 export const REG_EXP = yup.object({
-  mail: yup.string().email().required(),
+  email: yup.string().email().required(),
   password: yup
     .string()
     .matches(

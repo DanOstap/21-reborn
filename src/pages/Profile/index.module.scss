@@ -1,4 +1,33 @@
+input {
+  border: none;
+  border-bottom: black solid 2px;
+  width: 200px;
+  font-size: 1.25rem;
+}
+h2 {
+  font-size: 1.25rem;
+  max-width: 200px;
+}
 .form {
   display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.info {
+  display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+img {
+  width: 500px;
+}
+.name {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  gap: 20px;
+}
+button {
+  background-color: none;
+  border: none;
 }

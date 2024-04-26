@@ -12,8 +12,9 @@ body {
   margin: 0;
 }
 a {
-  color: black;
+  color: rgb(255, 255, 255);
   text-decoration: none;
+  background-color: rgba(255, 255, 255, 0);
 }
 i {
   font-size: 2rem;

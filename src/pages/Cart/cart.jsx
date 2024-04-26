@@ -6,7 +6,7 @@ const Cart = () => {
   const [addressInput, setAddressInput] = useState('')
   const [phoneInput, setPhoneInput] = useState('')
   const [addressResults, setAddressResults] = useState([])
-  const { cart, removeFromCart, clearCart } = useContext(CartContext)
+  const { cart, removeFromCart, clearCart, addToCart } = useContext(CartContext)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -61,48 +61,49 @@ const Cart = () => {
         setLoading(false)
       })
   }
-
+  const handleAddToCart = product => {
+    addToCart(product)
+  }
   return (
-    <>
-      <div className={styles.cartMenu}>
-        <div className={styles.cartContainer}>
-          <h2 className={styles.cartTitle}>Shopping Cart</h2>
-          {cart.length === 0 ? (
-            <p className={styles.emptyCart}>Your cart is empty.</p>
-          ) : (
-            <ul className={styles.cartList}>
-              {cart.map(item => (
-                <li key={item.id} className={styles.cartItem}>
-                  <img
-                    src={`../../../public/2daacfe012733764748706b7fc7517fd.jpg`}
-                    alt={item.name}
-                    className={styles.cartItemImage}
-                  />
-                  <div className={styles.cartItemDetails}>
-                    <h3 className={styles.cartItemName}>{item.name}</h3>
-                    <p className={styles.cartItemPrice}>{item.price} uah</p>
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                      className={styles.removeButton}
-                    >
-                      Remove from Cart
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+    <div className={styles.cartMenu}>
+      <div className={styles.cartContainer}>
+        <h2 className={styles.cartTitle}>Shopping Cart</h2>
+        {cart.length === 0 ? (
+          <p className={styles.emptyCart}>Your cart is empty.</p>
+        ) : (
+          <ul className={styles.cartList}>
+            {cart.map(item => (
+              <li key={item.id} className={styles.cartItem}>
+                <img
+                  src={`../../../public/футболка${item.id}.png`}
+                  alt={item.name}
+                  className={styles.cartItemImage}
+                />
+                <div className={styles.cartItemDetails}>
+                  <h3 className={styles.cartItemName}>{item.name}</h3>
+                  <p className={styles.cartItemPrice}>{item.price} uah</p>
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className={styles.removeButton}
+                  >
+                    Remove from Cart
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
 
-          {cart.length > 0 && (
-            <div className={styles.cartTotal}>
-              <p>Total: {calculateTotal()} uah</p>
-              <button onClick={clearCart} className={styles.clearCartButton}>
-                Clear Cart
-              </button>
-            </div>
-          )}
-        </div>
+        {cart.length > 0 && (
+          <div className={styles.cartTotal}>
+            <p>Total: {calculateTotal()} uah</p>
+            <button onClick={clearCart} className={styles.clearCartButton}>
+              Clear Cart
+            </button>
+          </div>
+        )}
       </div>
+
       <div className={styles.delivery}>
         <h2 className={styles.cartTitle}>Delivery</h2>
 
@@ -150,7 +151,8 @@ const Cart = () => {
           </div>
         </form>
       </div>
-    </>
+      {/* </div> */}
+    </div>
   )
 }
 

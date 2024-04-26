@@ -4,7 +4,7 @@ import styles from './index.module.scss'
 
 function Footer () {
   return (
-    <footer>
+    <footer className={styles}>
       <NavLink to='/'>Home</NavLink>
       <NavLink to='/info'>Information and delivery</NavLink>
       <NavLink to='/privacy'>Privacy Policy</NavLink>
