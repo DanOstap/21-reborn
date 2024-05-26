@@ -5,23 +5,45 @@ import styles from './index.module.scss'
 const Cart = () => {
   const [addressInput, setAddressInput] = useState('')
   const [phoneInput, setPhoneInput] = useState('')
+  const [nameInput, setNameInput] = useState('')
+  const [surnameInput, setSurnameInput] = useState('')
   const [addressResults, setAddressResults] = useState([])
   const { cart, removeFromCart, clearCart, addToCart } = useContext(CartContext)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-
+  const [amount, setAmount] = useState(1)
+  const [itemCounts, setItemCounts] = useState({})
   const handlePhoneChange = e => {
     setPhoneInput(e.target.value)
   }
-
+  const handleNameChange = e => {
+    setNameInput(e.target.value)
+  }
+  const handleSurnameChange = e => {
+    setSurnameInput(e.target.value)
+  }
   const handleAddressChange = e => {
     setAddressInput(e.target.value)
   }
-
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price, 0)
+    return cart.reduce(
+      (total, item) => total + item.price * (itemCounts[item.id] || 1),
+      0
+    )
   }
 
+  const addItem = itemId => {
+    setItemCounts(prevCounts => ({
+      ...prevCounts,
+      [itemId]: (prevCounts[itemId] || 1) + 1
+    }))
+  }
+  const removeItem = itemId => {
+    setItemCounts(prevCounts => ({
+      ...prevCounts,
+      [itemId]: Math.max((prevCounts[itemId] || 1) - 1, 1)
+    }))
+  }
   const searchAddress = e => {
     e.preventDefault()
 
@@ -63,6 +85,10 @@ const Cart = () => {
   }
   const handleAddToCart = product => {
     addToCart(product)
+    setItemCounts(prevCounts => ({
+      ...prevCounts,
+      [product.id]: (prevCounts[product.id] || 1) + 1
+    }))
   }
   return (
     <div className={styles.cartMenu}>
@@ -81,7 +107,22 @@ const Cart = () => {
                 />
                 <div className={styles.cartItemDetails}>
                   <h3 className={styles.cartItemName}>{item.name}</h3>
-                  <p className={styles.cartItemPrice}>{item.price} uah</p>
+                  <p className={styles.cartItemPrice}>{item.price}₴</p>
+                  <div className={styles.count}>
+                    <button
+                      className={styles.countChange}
+                      onClick={() => removeItem(item.id)}
+                    >
+                      -
+                    </button>
+                    <p className={styles.count}>{itemCounts[item.id] || 1}</p>
+                    <button
+                      className={styles.countChange}
+                      onClick={() => addItem(item.id)}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
                     onClick={() => removeFromCart(item.id)}
                     className={styles.removeButton}
@@ -96,7 +137,7 @@ const Cart = () => {
 
         {cart.length > 0 && (
           <div className={styles.cartTotal}>
-            <p>Total: {calculateTotal()} uah</p>
+            <p>Total: {calculateTotal()} ₴</p>
             <button onClick={clearCart} className={styles.clearCartButton}>
               Clear Cart
             </button>
@@ -106,9 +147,26 @@ const Cart = () => {
 
       <div className={styles.delivery}>
         <h2 className={styles.cartTitle}>Delivery</h2>
-
         <form className={styles.form} onSubmit={searchAddress}>
           <div className={styles.inputForm}>
+            <label htmlFor='address'>Name:</label>
+            <input
+              type='text'
+              id='name'
+              name='name'
+              value={nameInput}
+              onChange={handleNameChange}
+              className={styles.search}
+            />
+            <label htmlFor='address'>Surname:</label>
+            <input
+              type='text'
+              id='surname'
+              name='surname'
+              value={surnameInput}
+              onChange={handleSurnameChange}
+              className={styles.search}
+            />
             <label htmlFor='address'>Phone number:</label>
             <input
               type='text'
@@ -151,6 +209,7 @@ const Cart = () => {
           </div>
         </form>
       </div>
+
       {/* </div> */}
     </div>
   )

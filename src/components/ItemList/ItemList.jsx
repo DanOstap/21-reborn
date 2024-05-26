@@ -31,6 +31,7 @@ const Item = ({ product }) => {
         <Link to={`/product/${product.id}`}>
           <div className={styles.imageContainer}>
             <img
+              rel='preload'
               className={styles.image}
               src={`../../../public/футболка${product.id}.png`}
               alt={`img ${product.id}`}
@@ -46,7 +47,7 @@ const Item = ({ product }) => {
           onClick={handleAddToCart}
         >
           <h2 className={styles.price}>
-            {isHovered ? 'Add to cart' : `${product.price} uah`}
+            {isHovered ? 'Add to cart' : `${product.price} ₴`}
           </h2>
         </button>
       </div>

@@ -1,5 +1,3 @@
-body {
-}
 .cartMenu {
   display: flex;
   flex-direction: row;
@@ -8,7 +6,7 @@ body {
   gap: 30px;
 }
 .cartContainer {
-  max-width: 800px;
+  max-width: 1100px;
   width: 100%;
   // margin: 0 auto;
   min-height: 500px;
@@ -19,6 +17,13 @@ body {
   background-color: #fff;
   color: black;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.count {
+  font-size: 1.5rem;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .delivery {
   display: flex;
@@ -52,29 +57,35 @@ body {
 }
 
 .cartItemImage {
-  width: 200px;
-  height: 250px;
+  width: 400px;
+  height: 450px;
   object-fit: cover;
   margin-right: 12px;
 }
 
 .cartItemName {
   flex-grow: 1;
-  font-size: 18px;
+  font-size: 2rem;
   color: #333;
 }
 
 .cartItemPrice {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-right: 12px;
 }
 .cartItemList {
   display: flex;
   flex-direction: row;
 }
+.countChange {
+  margin-left: 0;
+  padding: 15px;
+  border-radius: 10px;
+}
 .removeButton {
   background-color: #ff4b5d;
   color: #fff;
+  display: block;
   border: none;
   padding: 8px 12px;
   cursor: pointer;
@@ -145,6 +156,6 @@ label {
 .inputForm {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
 }
