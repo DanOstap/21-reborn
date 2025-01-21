@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import styles from './index.module.scss'
 import { CartContext } from '../../utils/cartcontext'
+import ApiUrl from '../../../urls'
 
 const ProductPage = () => {
   const { addToCart: addToCartContext, cart } = useContext(CartContext)
@@ -13,7 +14,7 @@ const ProductPage = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5555/api/products/${id}`
+          `${ApiUrl}api/products/${id}`
         )
         setProduct(response.data)
       } catch (error) {

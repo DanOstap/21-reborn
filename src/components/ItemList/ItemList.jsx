@@ -4,10 +4,10 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import styles from './index.module.scss'
 import { CartContext } from '../../utils/cartcontext'
-
+import ApiUrl from '../../../urls'
 const fetchProductsData = async () => {
   try {
-    const response = await axios.get('http://localhost:5555/api/products/')
+    const response = await axios.get(`${ApiUrl}/api/products/`)
     return response.data
   } catch (error) {
     throw new Error(`An error occurred: ${error.message}`)
